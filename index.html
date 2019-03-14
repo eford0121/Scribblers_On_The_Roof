@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Scribble Pad</title>
+  <!-- stylesheet from bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!-- stylesheet from bootswatch -->
+  <link rel="stylesheet" href="https://bootswatch.com/4/sketchy/bootstrap.min.css">
+  <!--stylesheet from drawingboard library-->
+  <link rel="stylesheet" href="libraries/drawingboard.js/dist/drawingboard.css">
+  
+  <!-- jquery library -->
+  <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <!--js file in the drawingboard library-->
+  <script type="text/javascript" src="libraries/drawingboard.js/dist/drawingboard.js" ></script>
+ 
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+          <div class="col-md-12 jumbotron text-center">
+            <h1 class="text-primary">Scribble Time</h1>
+            <h2 class="text-primary">Is your scribble recognizeable? Let's find out!</h2>
+            <h2 class="text-primary">1. Draw one of the items listed. 2. Click the 'Predict Scribble' button.</h2>
+            <a id="submitbutton" class="btn btn-success" style = "margin:6px" ><h3>Predict Scribble</h3></button></a>  
+          </div>
+        </div>
+      </div>
+     
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+          </br>
+            <h2 class="text-danger">Predicted Image:<h2 id="predictedimage"></h2></h2>
+          </div>
+        </div>
+        </div>      
+      
+      </br>    
+
+        <div class="container">
+          <div class="col-md-6">
+            <div class="panel panel-info">
+            <div class="panel-heading">
+            <h3 class="panel-title">Scribble Pad</h3>
+            <!-- INSERT DIV ID FOR THE DRAWINGBOARD -->
+            <div id="pad">
+              <style>
+              #pad {
+              width: 500px;
+              height: 350px;
+              }   
+              </style>
+              <script> var myBoard = new DrawingBoard.Board("pad")</script>
+            </div>
+            </div>
+            </div>
+            </div>
+
+          <div class="col-md-6"> 
+            <h3 center class="panel-title">Swiftly Scribble One of These Items</h3>
+            </div>
+          
+            <div class="col-md-3">
+              
+            </br>
+            <button type="button" class="btn btn-outline-success" style = "margin:6px" href="/flask"><h3>Ant</h3></button>
+             </br>
+             <button type="button" class="btn btn-outline-success" style = "margin:6px" href="/flask"><h3>Bee</h3></button>
+             </br>
+             <button type="button" class="btn btn-outline-success" style = "margin:6px" ref="/flask"><h3>Cactus</h3></button>
+             </br>
+             <button type="button" class="btn btn-outline-success" style = "margin:6px" href="/flask"><h3>Cat</h3></button>
+             </br>
+             <button type="button" class="btn btn-outline-success" style = "margin:6px" href="/flask"><h3>Dolphin</h3></button>
+             </br>
+             <button type="button" class="btn btn-outline-success" style = "margin:6px" href="/flask"><h3>Flamingo</h3></button>
+             </br>
+             <button type="button" class="btn btn-outline-success" style = "margin:6px" href="/flask"><h3>Flower</h3></button>
+             </br>
+             </div>
+
+             <div class="col-md-3">
+             </br>
+             <button type="button" class="btn btn-outline-success" style = "margin:6px" href="/flask"><h3>Ice Cream Cone</h3></button>
+             </br>
+             <button type="button" class="btn btn-outline-success" style = "margin:6px" href="/flask"><h3>Mushroom</h3></button>
+             </br>
+             <button type="button" class="btn btn-outline-success" style = "margin:6px" href="/flask"><h3>Owl</h3></button>
+             </br>
+             <button type="button" class="btn btn-outline-success" style = "margin:6px" href="/flask"><h3>Penguin</h3></button>
+             </br>
+             <button type="button" class="btn btn-outline-success" style = "margin:6px" href="/flask"><h3>Pig</h3></button>
+             </br>
+             <button type="button" class="btn btn-outline-success" style = "margin:6px" href="/flask"><h3>Snake</h3></button>
+             </br>
+             <button type="button" class="btn btn-outline-success" style = "margin:6px" href="/flask"><h3>Sun</h3></button>
+             </br>
+             </div>
+             </div>
+             </div>
+          </div>
+        
+        </div>
+      
+      </div>
+
+  
+
+</body>
+
+
+</html>
