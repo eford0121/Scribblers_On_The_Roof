@@ -1,119 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Scribble Pad</title>
-  <!-- stylesheet from bootstrap -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <!-- stylesheet from bootswatch -->
-  <link rel="stylesheet" href="https://bootswatch.com/4/sketchy/bootstrap.min.css">
-  <!--stylesheet from drawingboard library-->
-  <link rel="stylesheet" href="libraries/drawingboard.js/dist/drawingboard.css">
-  
-  <!-- jquery library -->
-  <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-  <!--js file in the drawingboard library-->
-  <script type="text/javascript" src="libraries/drawingboard.js/dist/drawingboard.js" ></script>
- 
+    <meta charset="UTF-8">
+    <title>CNN</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
+	<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js" integrity="sha384-xymdQtn1n3lH2wcu0qhcdaOpQwyoarkgLVxC/wZ5q7h9gHtxICrpcaSUfygqZGOe" crossorigin="anonymous"></script>
 
 </head>
-
 <body>
-    <div class="container">
-        <div class="row">
-          <div class="col-md-12 jumbotron text-center">
-            <h1 class="text-primary">Scribble Time</h1>
-            <h2 class="text-primary">Is your scribble recognizeable? Let's find out!</h2>
-            <h2 class="text-primary">1. Draw one of the items listed. 2. Click the 'Predict Scribble' button.</h2>
-            <a id="submitbutton" class="btn btn-success" style = "margin:6px" ><h3>Predict Scribble</h3></button></a>  
-          </div>
-        </div>
-      </div>
-     
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 text-center">
-          </br>
-            <h2 class="text-danger">Predicted Image:<h2 id="predictedimage"></h2></h2>
-          </div>
-        </div>
-        </div>      
-      
-      </br>    
 
-        <div class="container">
-          <div class="col-md-6">
-            <div class="panel panel-info">
-            <div class="panel-heading">
-            <h3 class="panel-title">Scribble Pad</h3>
-            <!-- INSERT DIV ID FOR THE DRAWINGBOARD -->
-            <div id="pad">
-              <style>
-              #pad {
-              width: 500px;
-              height: 350px;
-              }   
-              </style>
-              <script> var myBoard = new DrawingBoard.Board("pad")</script>
-            </div>
-            </div>
-            </div>
-            </div>
+	<h1 style="border-radius:5px; background-color: rgb(250, 244, 207);  margin: 0 250px; margin-top:-20px; padding-top: 10px; padding-bottom: 20px; ">Image Prediction using <span>Convolutional Neural Networks</span></h1>
 
-          <div class="col-md-6"> 
-            <h3 center class="panel-title">Swiftly Scribble One of These Items</h3>
-            </div>
-          
-            <div class="col-md-3">
-              
-            </br>
-            <button type="button" class="btn btn-outline-success" style = "margin:6px" href="/flask"><h3>Ant</h3></button>
-             </br>
-             <button type="button" class="btn btn-outline-success" style = "margin:6px" href="/flask"><h3>Bee</h3></button>
-             </br>
-             <button type="button" class="btn btn-outline-success" style = "margin:6px" ref="/flask"><h3>Cactus</h3></button>
-             </br>
-             <button type="button" class="btn btn-outline-success" style = "margin:6px" href="/flask"><h3>Cat</h3></button>
-             </br>
-             <button type="button" class="btn btn-outline-success" style = "margin:6px" href="/flask"><h3>Dolphin</h3></button>
-             </br>
-             <button type="button" class="btn btn-outline-success" style = "margin:6px" href="/flask"><h3>Flamingo</h3></button>
-             </br>
-             <button type="button" class="btn btn-outline-success" style = "margin:6px" href="/flask"><h3>Flower</h3></button>
-             </br>
-             </div>
+		<canvas id="canvas" width="280" height="280" style="border:4px solid; float: left; margin: 70px; margin-top:200px;  margin-left: 120px; border-radius: 5px; cursor: crosshair;"></canvas>
 
-             <div class="col-md-3">
-             </br>
-             <button type="button" class="btn btn-outline-success" style = "margin:6px" href="/flask"><h3>Ice Cream Cone</h3></button>
-             </br>
-             <button type="button" class="btn btn-outline-success" style = "margin:6px" href="/flask"><h3>Mushroom</h3></button>
-             </br>
-             <button type="button" class="btn btn-outline-success" style = "margin:6px" href="/flask"><h3>Owl</h3></button>
-             </br>
-             <button type="button" class="btn btn-outline-success" style = "margin:6px" href="/flask"><h3>Penguin</h3></button>
-             </br>
-             <button type="button" class="btn btn-outline-success" style = "margin:6px" href="/flask"><h3>Pig</h3></button>
-             </br>
-             <button type="button" class="btn btn-outline-success" style = "margin:6px" href="/flask"><h3>Snake</h3></button>
-             </br>
-             <button type="button" class="btn btn-outline-success" style = "margin:6px" href="/flask"><h3>Sun</h3></button>
-             </br>
-             </div>
-             </div>
-             </div>
-          </div>
-        
-        </div>
-      
-      </div>
+		<div id="debug" style="margin:65px; margin-top:100px; margin-left:120px;">
+			<br><br>
+			<button id="clearButton" class="clearbutton"><i class="fas fa-magic"> </i> Clear</button>
 
-  
+		</div>
 
+		<div class="flex" style="margin-left:120px; margin-top:520px; float:left; position:absolute;">
+			<a href="#" class="bttn" style="width:280px;"><span style=" font-weight: 400; font-family: 'Open Sans', Helvetica;"> Predict </span></a>
+
+		</div>
+
+		<div >
+			<p id="result" style="color: black; margin-right:20px; font-size:35px; margin-top:300px;float:left;"></p>
+			<strong><p id="datares" style="color: black; margin-right:20px; font-size:35px; margin-top:300px;float:left;"></p></strong>
+
+		</div>
+
+
+
+		<script src="{{ url_for('static',filename='jquery.min.js') }}"></script>
+	    <script src="{{ url_for('static',filename='index.js') }}"></script>
+	    <script type="text/javascript">
+
+	   		$(".bttn").click(function(){
+	   			var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+	   			var canvasObj = document.getElementById("canvas");
+	   			var img = canvasObj.toDataURL();
+	   			$.ajax({
+	   				type: "POST",
+	   				url: $SCRIPT_ROOT + "/predict/",
+	   				data: img,
+	   				success: function(data){
+	   					$('#result').text('Predicted Sketch:');
+	   					$('#datares').text(data);
+	   				}
+	   			});
+	   		});
+
+	   </script>
 </body>
-
-
 </html>
