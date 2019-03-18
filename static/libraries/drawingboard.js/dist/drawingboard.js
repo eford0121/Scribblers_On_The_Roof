@@ -359,9 +359,9 @@ DrawingBoard.Board = function(id, opts) {
 DrawingBoard.Board.defaultOpts = {
 	//Scribblers on the Roof modified controls
 	// controls: ['Color', 'DrawingMode', 'Size', 'Navigation'],
-	controls: ['DrawingMode','Navigation','Download'],
+	// controls: ['DrawingMode','Navigation','Download'],
 	// controls: ['DrawingMode','Navigation'],
-	// controls: ['Navigation','Download'],
+	controls: ['Navigation','Download'],
 	controlsPosition: "top left",
 	color: "#000000",
 	size: 10, //originally 1

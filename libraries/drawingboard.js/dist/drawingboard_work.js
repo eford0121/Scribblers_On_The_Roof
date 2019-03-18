@@ -360,11 +360,9 @@ DrawingBoard.Board.defaultOpts = {
 	//Scribblers on the Roof modified controls
 	// controls: ['Color', 'DrawingMode', 'Size', 'Navigation'],
 	controls: ['DrawingMode','Navigation','Download'],
-	// controls: ['DrawingMode','Navigation'],
-	// controls: ['Navigation','Download'],
 	controlsPosition: "top left",
 	color: "#000000",
-	size: 10, //originally 1
+	size: 6, //originally 1
 	background: "#fff",
 	eraserColor: "background",
 	fillTolerance: 100,
@@ -373,8 +371,7 @@ DrawingBoard.Board.defaultOpts = {
 	droppable: false,
 	enlargeYourContainer: false,
 	errorMessage: "<p>It seems you use an obsolete browser. <a href=\"http://browsehappy.com/\" target=\"_blank\">Update it</a> to start drawing.</p>",
-	// set stretchingImg to true to see if it will help with the prediction Scribblers on the Roof
-	stretchImg: true //when setting the canvas img, strech the image at the whole canvas size when this opt is true
+	stretchImg: false //when setting the canvas img, strech the image at the whole canvas size when this opt is true
 };
 
 
@@ -638,6 +635,29 @@ DrawingBoard.Board.prototype = {
 		img = img.replace("image/png", "image/octet-stream");
 		window.location.href = img;
 	},
+
+	// Scribblers on the Roof - Trying to see how to save the image 
+	
+	// function exportCanvasAsPNG(id, fileName) {
+
+	// 	var canvasElement = document.getElementById(id);
+	
+	// 	var MIME_TYPE = "image/png";
+	
+	// 	var imgURL = canvasElement.toDataURL(MIME_TYPE);
+	
+	// 	var dlLink = document.createElement('a');
+	// 	dlLink.download = fileName;
+	// 	dlLink.href = imgURL;
+	// 	dlLink.dataset.downloadurl = [MIME_TYPE, dlLink.download, dlLink.href].join(':');
+	
+	// 	document.body.appendChild(dlLink);
+	// 	dlLink.click();
+	// 	document.body.removeChild(dlLink);
+	// }
+
+
+
 
 	/**
 	 * WebStorage handling : save and restore to local or session storage
@@ -1369,14 +1389,45 @@ DrawingBoard.Control.Size = DrawingBoard.Control.extend({
 		return !!available;
 	}
 });
+// DrawingBoard.Control.Download = DrawingBoard.Control.extend({
+
+// 	name: 'download',
+
+// 	initialize: function() {
+// 		this.$el.append('<button class="drawing-board-control-download-button"></button>');
+// 		this.$el.on('click', '.drawing-board-control-download-button', $.proxy(function(e) {
+// 		//add this if I want a special button to Submit/Predict the image	
+// 		//this.$el.append('<a id="submitbutton" class="btn btn-outline-danger" style = "margin:6px" ><h3>Predict Scribble</h3></button></a>');
+// 		//this.$el.on('click', '#submitbutton', $.proxy(function(e) {
+// 			this.board.downloadImg();
+// 			e.preventDefault();
+// 		}, this));
+// 	}
+
+// });
+
+// DrawingBoard.Control.Download = DrawingBoard.Control.extend({
+
+// 	name: 'download',
+
+// 	initialize: function() {
+// 		this.$el.append('<button class="drawing-board-control-download-button"></button>');
+// 		this.$el.on('click', '.drawing-board-control-download-button', $.proxy(function(e) {
+// 			this.board.downloadImg();
+// 			e.preventDefault();
+// 		}, this));
+// 	}
+
+// });
+
 DrawingBoard.Control.Download = DrawingBoard.Control.extend({
 
-	name: 'download',
+	name: 'save',
 
 	initialize: function() {
 		this.$el.append('<button class="drawing-board-control-download-button"></button>');
 		this.$el.on('click', '.drawing-board-control-download-button', $.proxy(function(e) {
-			this.board.downloadImg();
+			this.board.saveWebStorage();
 			e.preventDefault();
 		}, this));
 	}

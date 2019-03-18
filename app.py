@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 
 import keras
 from keras.preprocessing import image
@@ -10,7 +10,6 @@ app.config['UPLOAD_FOLDER'] = 'uploads'
 
 model = None
 graph = None
-
 
 # Loading a keras model with flask
 # https://blog.keras.io/building-a-simple-keras-deep-learning-rest-api.html
@@ -37,9 +36,13 @@ def prepare_image(img):
 
     # Return the processed feature array
     return image_array
+    
+@app.route('/')
+def index():
+    data = "mushroom"
+    return render_template("index.html", data=data)
 
-
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/predict', methods=['GET', 'POST'])
 def upload_file():
     data = {"success": False}
     if request.method == 'POST':
@@ -74,12 +77,50 @@ def upload_file():
 
                 # Use the model to make a prediction
                 predicted_digit = model.predict_classes(image_array)[0]
-                data["prediction"] = str(predicted_digit)
-
+                
+                if predicted_digit == 0:
+                    predicted_image = "CAT"
+                elif predicted_digit == [1]:
+                    predicted_image = "PENGIUN"
+                elif predicted_digit == [2]:
+                    predicted_image = "ANT"  
+                elif predicted_digit == [3]:
+                    predicted_image = "BEE"
+                elif predicted_digit == [4]:
+                    predicted_image = "FLAMINGO"
+                elif predicted_digit == [5]:
+                    predicted_image = "OWL" 
+                elif predicted_digit == [6]:
+                    predicted_image = "PIG"
+                elif predicted_digit == [7]:
+                    predicted_image = "DOLPHIN"
+                elif predicted_digit == [8]:
+                    predicted_image = "SNAKE"
+                elif predicted_digit == [9]:
+                    predicted_image = "ICE CREAM"
+                elif predicted_digit == [10]:
+                    predicted_image = "SUN"
+                elif predicted_digit == [11]:
+                    predicted_image = "MUSHROOM"
+                elif predicted_digit == [12]: 
+                    predicted_image = "FLOWER"
+                elif predicted_digit == [13]:
+                    predicted_image = "CACTUS"
+                else: 
+                    predicted_image = "Cannot Recognize Your Scribble"
+                
+                # Indicates the Predicted Index Number
+                data["predicted_digit"] = str(predicted_digit)
+                # Indicates the Predicted Image
+                data["predicted_image"] = str(predicted_image)
                 # indicate that the request was a success
                 data["success"] = True
 
-            return jsonify(data)
+                #data = jsonify(data)
+
+            return render_template('index.html', data=data)
+            
+            #return jsonify(data)
     return '''
     <!doctype html>
     <title>Upload new File</title>
@@ -92,4 +133,4 @@ def upload_file():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True,port=8008)
