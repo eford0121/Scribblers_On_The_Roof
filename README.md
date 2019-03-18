@@ -1,6 +1,8 @@
 # Scribblers_On_The_Roof
 Project 3 Data Analysis Boot Camp
 
+Data Source: https://github.com/googlecreativelab/quickdraw-dataset
+
 # Suggested Final Project
 
 De-Mystifying ML
