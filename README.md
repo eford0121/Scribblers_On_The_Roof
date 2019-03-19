@@ -2,6 +2,12 @@
 Project 3 Data Analysis Boot Camp
 
 Data Source: https://github.com/googlecreativelab/quickdraw-dataset
+drawingboard.js library: https://github.com/Leimi/drawingboard.js#drawingboardjs
+
+demonstration links:
+Single Scribble: https://youtu.be/pFRYrKUPPnQ
+Multiple Scribbles: https://youtu.be/03-BzOdNZQU
+
 
 # Suggested Final Project
 
